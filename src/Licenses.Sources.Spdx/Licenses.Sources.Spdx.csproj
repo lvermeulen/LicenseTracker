@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <Authors>Luk Vermeulen</Authors>
+    <Company>Luk Vermeulen</Company>
+    <Copyright>Copyright 2018 by Luk Vermeulen. All rights reserved.</Copyright>
+    <PackageLicenseUrl>https://github.com/lvermeulen/LicenseTracker/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/lvermeulen/LicenseTracker</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lvermeulen/LicenseTracker</RepositoryUrl>
+    <PackageIconUrl>https://i.imgur.com/ds930kG.png?1</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>license tracker source spdx</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Licenses.Core\Licenses.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Flurl.Http">
+      <HintPath>..\..\..\..\Users\luk.vermeulen\.nuget\packages\flurl.http\2.2.0\lib\netstandard2.0\Flurl.Http.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
