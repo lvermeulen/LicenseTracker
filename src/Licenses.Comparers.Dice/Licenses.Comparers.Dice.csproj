@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/lvermeulen/LicenseTracker</RepositoryUrl>
     <PackageIconUrl>https://i.imgur.com/ds930kG.png?1</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>license tracker source spdx</PackageTags>
+    <PackageTags>license tracker comparer soerensen sorensen dice</PackageTags>
   </PropertyGroup>
 
 </Project>
