@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Licenses.Authorities.Npm;
 using Licenses.Authorities.NuGet;
+using Licenses.Comparers.Dice;
 using Licenses.Core;
 using Licenses.Sources.GitHub;
 using Newtonsoft.Json;
@@ -34,19 +35,34 @@ namespace LicenseTracker
             }
         }
 
+        private static async Task ProcessLicenseAsync(string packageName, string version, IEnumerable<License> knownLicenses)
+        {
+            var license = await s_checker.ExecuteAsync(packageName, version);
+
+            var comparer = new SoerensenDiceComparer(license?.Text, 0.90);
+            foreach (var knownLicense in knownLicenses)
+            {
+                bool equal = comparer.Equals(knownLicense.Text);
+                if (equal)
+                {
+                    Console.WriteLine($"License check: {packageName}/{version} has license {knownLicense.Name}");
+                    return;
+                }
+            }
+
+            Console.WriteLine($"License check: {packageName}/{version} has unknown license"); ;
+        }
+
         public static async Task Main(string[] args)
         {
-            var licenses = await LoadLicensesAsync("licenses.json");
-            s_checker.AddKnownLicenses(licenses);
+            var knownLicenses = (await LoadLicensesAsync("licenses.json")).ToList();
+            s_checker.AddKnownLicenses(knownLicenses);
 
             s_checker.AddLicenseAuthority(new NuGetLicenseAuthority(s_checker.KnownLicenses));
             s_checker.AddLicenseAuthority(new NpmLicenseAuthority(s_checker.KnownLicenses));
 
-            var license = await s_checker.ExecuteAsync("Flurl.Http.Xml", "1.5.0");
-            Console.WriteLine($"License check: {license?.Name ?? "unknown"} - Flurl.Http.Xml/1.5.0");
-
-            license = await s_checker.ExecuteAsync("Yup", "0.24.1");
-            Console.WriteLine($"License check: {license?.Name ?? "unknown"} - Yup/0.24.1");
+            await ProcessLicenseAsync("Flurl.Http.Xml", "1.5.0", knownLicenses);
+            await ProcessLicenseAsync("Yup", "0.24.1", knownLicenses);
 
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();

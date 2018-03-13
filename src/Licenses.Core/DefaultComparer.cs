@@ -3,20 +3,22 @@ using System.Linq;
 
 namespace Licenses.Core
 {
-    public class DefaultLicenseComparer : ILicenseComparer
+    public class DefaultComparer : IEquatable<string>
     {
+        private readonly string _s;
         private readonly int _linesToSkip;
         private readonly string[] _wordsToIgnore;
         private readonly string[] _linesToIgnore;
 
-        public DefaultLicenseComparer(int linesToSkip = 1, string[] wordsToIgnore = null, string[] linesToIgnore = null)
+        public DefaultComparer(string s, int linesToSkip = 1, string[] wordsToIgnore = null, string[] linesToIgnore = null)
         {
+            _s = s;
             _linesToSkip = linesToSkip;
             _wordsToIgnore = wordsToIgnore ?? new[] { "\n", "\r", "\t", "the", " ", ",", ";", "." };
             _linesToIgnore = linesToIgnore ?? new[] { "copyright" };
         }
 
-        private string Normalize(string s)
+        public string Normalize(string s)
         {
             return string.Join("", s.ToLowerInvariant()
                 .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
@@ -26,9 +28,9 @@ namespace Licenses.Core
                 .ReplaceAll(_wordsToIgnore, "");
         }
 
-        public bool LicensesEqual(string left, string right)
+        public bool Equals(string other)
         {
-            return Normalize(left) == Normalize(right);
+            return Normalize(_s) == Normalize(other);
         }
     }
 }

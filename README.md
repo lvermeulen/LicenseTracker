@@ -10,7 +10,8 @@ LicenseTracker is a library for tracking licenses of dependencies.
 * License authorities: NuGet and npm
 * License URL providers: NuGet
 * License readers: GitHub
-* Write your own license source, authority, url provider and reader
+* License comparers: Soerensen-Dice
+* Write your own license source, authority, url provider, reader and comparer
 
 ## Usage:
 

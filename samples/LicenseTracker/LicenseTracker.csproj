@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Licenses.Authorities.Npm\Licenses.Authorities.Npm.csproj" />
     <ProjectReference Include="..\..\src\Licenses.Authorities.NuGet\Licenses.Authorities.NuGet.csproj" />
+    <ProjectReference Include="..\..\src\Licenses.Comparers.Dice\Licenses.Comparers.Dice.csproj" />
     <ProjectReference Include="..\..\src\Licenses.Core\Licenses.Core.csproj" />
     <ProjectReference Include="..\..\src\Licenses.Sources.GitHub\Licenses.Sources.GitHub.csproj" />
   </ItemGroup>

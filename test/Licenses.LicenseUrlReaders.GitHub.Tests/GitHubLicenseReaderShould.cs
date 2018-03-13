@@ -19,7 +19,7 @@ namespace Licenses.LicenseUrlReaders.GitHub.Tests
         public async Task GetLicenseAsync()
         {
             string result = await _reader.GetLicenseTextAsync("https://github.com/lvermeulen/Flurl.Http.Xml/blob/master/LICENSE");
-            Assert.True(new DefaultLicenseComparer().LicensesEqual("some body", result));
+            Assert.True(new DefaultComparer(result).Equals("some body"));
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Licenses.Authorities.NuGet
         private readonly IList<License> _knownLicenses;
         private readonly ILicenseUrlProvider _provider = new NuGetLicenseUrlProvider();
         private readonly ILicenseUrlReader _reader = new GitHubLicenseUrlReader();
-        private readonly ILicenseComparer _comparer = new DefaultLicenseComparer();
 
         public NuGetLicenseAuthority(IEnumerable<License> knownLicenses)
         {
@@ -42,7 +41,7 @@ namespace Licenses.Authorities.NuGet
             }
 
             return _knownLicenses
-                .FirstOrDefault(x => _comparer.LicensesEqual(licenseText, x.Text));
+                .FirstOrDefault(x => new DefaultComparer(licenseText).Equals(x.Text));
         }
     }
 }

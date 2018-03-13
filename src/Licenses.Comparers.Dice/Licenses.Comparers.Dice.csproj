@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netstandard1.4</TargetFrameworks>
+    <Authors>Luk Vermeulen</Authors>
+    <Company>Luk Vermeulen</Company>
+    <Copyright>Copyright 2018 by Luk Vermeulen. All rights reserved.</Copyright>
+    <PackageLicenseUrl>https://github.com/lvermeulen/LicenseTracker/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/lvermeulen/LicenseTracker</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lvermeulen/LicenseTracker</RepositoryUrl>
+    <PackageIconUrl>https://i.imgur.com/ds930kG.png?1</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>license tracker source spdx</PackageTags>
+  </PropertyGroup>
+
+</Project>

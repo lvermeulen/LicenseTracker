@@ -1,10 +1,11 @@
+using System;
 using System.Threading.Tasks;
 using Licenses.LicenseUrlReaders.Github;
 using Xunit;
 
-namespace Licenses.Core.Tests
+namespace Licenses.Comparers.Dice.Tests
 {
-    public class DefaultLicenseComparerShould
+    public class SoerensenDiceComparerShould
     {
         [Fact]
         public async Task LicensesEqual()
@@ -34,9 +35,19 @@ SOFTWARE.";
             string license = await new GitHubLicenseUrlReader()
                 .GetLicenseTextAsync("https://raw.githubusercontent.com/lvermeulen/Flurl.Http.Xml/master/LICENSE");
 
-            var comparer = new DefaultComparer(MIT);
+            var comparer = new SoerensenDiceComparer(MIT, 0.90);
             bool equal = comparer.Equals(license);
             Assert.True(equal);
+        }
+
+        [Fact]
+        public void ThrowWhenNull()
+        {
+            Assert.Throws<ArgumentNullException>("other", () =>
+            {
+                var comparer = new SoerensenDiceComparer("", 0.90);
+                comparer.Equals(null);
+            });
         }
     }
 }
