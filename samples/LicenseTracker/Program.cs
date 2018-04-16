@@ -45,12 +45,12 @@ namespace LicenseTracker
                 bool equal = comparer.Equals(knownLicense.Text);
                 if (equal)
                 {
-                    Console.WriteLine($"License check: {packageName}/{version} has license {knownLicense.Name}");
+                    Console.WriteLine($"License check: {packageName}/{version} is licensed with {knownLicense.Name}");
                     return;
                 }
             }
 
-            Console.WriteLine($"License check: {packageName}/{version} has unknown license"); ;
+            Console.WriteLine($"License check: {packageName}/{version} has unknown license");
         }
 
         public static async Task Main(string[] args)
